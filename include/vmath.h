@@ -802,7 +802,7 @@ public:
         int n;
         for (n = 0; n < w; n++)
             data[n] = data[n] * that;
-        return result;
+        return *this;
     }
 
     // Matrix multiply.
@@ -1278,7 +1278,7 @@ static inline T mix(const T& A, const T& B, typename T::element_type t)
 template <typename T>
 static inline T mix(const T& A, const T& B, const T& t)
 {
-    return B + T * (B - A);
+    return B + t * (B - A);
 }
 
 };
