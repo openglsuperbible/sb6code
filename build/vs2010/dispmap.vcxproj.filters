@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dispmap\dispmap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\media\shaders\dispmap\dispmap.fs.glsl" />
+    <None Include="..\..\bin\media\shaders\dispmap\dispmap.vs.glsl" />
+    <None Include="..\..\bin\media\shaders\dispmap\dispmap.tcs.glsl" />
+    <None Include="..\..\bin\media\shaders\dispmap\dispmap.tes.glsl" />
+  </ItemGroup>
+</Project>

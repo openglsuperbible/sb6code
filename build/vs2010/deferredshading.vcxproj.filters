@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\deferredshading\deferredshading.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\media\shaders\deferredshading\render.vs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\light.fs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\light.vs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\render.fs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\render-nm.fs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\render-nm.vs.glsl" />
+    <None Include="..\..\bin\media\shaders\deferredshading\render-vis.fs.glsl" />
+  </ItemGroup>
+</Project>

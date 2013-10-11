@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\prefixsum2d\prefixsum2d.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\media\shaders\prefixsum2d\prefixsum2d.cs.glsl" />
+    <None Include="..\..\bin\media\shaders\prefixsum2d\showimage.vs.glsl" />
+    <None Include="..\..\bin\media\shaders\prefixsum2d\showimage.fs.glsl" />
+  </ItemGroup>
+</Project>
