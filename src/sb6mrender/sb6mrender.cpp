@@ -121,12 +121,7 @@ protected:
 
         loadShaders();
 
-        // object.load("media/objects/ladybug.sbm");
-        // object.load("d:/temp/sphere.sbm");
-        object.load("c:/temp/rocks/rock001.sbm");
-
-        // glEnable(GL_CULL_FACE);
-        //glCullFace(GL_FRONT);
+        object.load("media/objects/ladybug.sbm");
 
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -157,13 +152,8 @@ protected:
                                                      1000.0f);
         glUniformMatrix4fv(proj_location, 1, GL_FALSE, proj_matrix);
 
-        vmath::mat4 mv_matrix = vmath::translate(0.0f, -0.5f, -4.5f) *
-                                /*vmath::translate(sinf(2.1f * f) * 0.5f,
-                                                    cosf(1.7f * f) * 0.5f,
-                                                    sinf(1.3f * f) * cosf(1.5f * f) * 2.0f) **/
+        vmath::mat4 mv_matrix = vmath::translate(0.0f, -0.5f, -7.0f) *
                                 vmath::rotate((float)currentTime * 5.0f, 0.0f, 1.0f, 0.0f) *
-                                // vmath::rotate((float)currentTime * 1.0f, 1.0f, 0.0f, 0.0f) *
-                                // mat_rotation *
                                 vmath::mat4::identity();
         glUniformMatrix4fv(mv_location, 1, GL_FALSE, mv_matrix);
 

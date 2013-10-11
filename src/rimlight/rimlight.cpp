@@ -55,8 +55,7 @@ protected:
     {
         loadShaders();
 
-        // object.load("media/objects/dragon.sbm");
-        object.load("d:/temp/rocks/concatenated4.sbm");
+        object.load("media/objects/dragon.sbm");
 
         glEnable(GL_CULL_FACE);
         //glCullFace(GL_FRONT);
@@ -99,8 +98,7 @@ protected:
         glUniform3fv(uniforms.rim_color, 1, rim_enable ? rim_color : vmath::vec3(0.0f));
         glUniform1f(uniforms.rim_power, rim_power);
 
-        // object.render();
-        object.render_sub_object(int(f * 2.0f) % object.get_sub_object_count());
+        object.render();
     }
 
     virtual void shutdown()
