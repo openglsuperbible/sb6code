@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2013 Graham Sellers
+ * Copyright ï¿½ 2012-2013 Graham Sellers
  *
  * This code is part of the OpenGL SuperBible, 6th Edition.
  *
@@ -62,13 +62,15 @@
     #pragma comment (lib, "OpenGL32.lib")
 #endif
 
+#include "GL/gl3w.h"
+
 #define GLFW_NO_GLU 1
 #define GLFW_INCLUDE_GLCOREARB 1
 #include "GL/glfw.h"
-#include "GL/gl3w.h"
 
 #include "sb6ext.h"
 
+#include <stdio.h>
 #include <string.h>
 
 namespace sb6
@@ -84,16 +86,22 @@ public:
         bool running = true;
         app = the_app;
 
-        glfwInit();
+        if (!glfwInit())
+        {
+            fprintf(stderr, "Failed to initialize GLFW\n");
+            return;
+        }
 
         init();
 
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, info.majorVersion);
         glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, info.minorVersion);
+
 #ifdef _DEBUG
         glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif /* _DEBUG */
         glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwOpenWindowHint(GLFW_FSAA_SAMPLES, info.samples);
         glfwOpenWindowHint(GLFW_STEREO, info.flags.stereo ? GL_TRUE : GL_FALSE);
         if (info.flags.fullscreen)
@@ -110,8 +118,13 @@ public:
         }
         else
         {
-            glfwOpenWindow(info.windowWidth, info.windowHeight, 8, 8, 8, 0, 32, 0, GLFW_WINDOW);
+            if (!glfwOpenWindow(info.windowWidth, info.windowHeight, 8, 8, 8, 0, 32, 0, GLFW_WINDOW))
+            {
+                fprintf(stderr, "Failed to open window\n");
+                return;
+            }
         }
+
         glfwSetWindowTitle(info.title);
         glfwSetWindowSizeCallback(glfw_onResize);
         glfwSetKeyCallback(glfw_onKey);
@@ -123,6 +136,12 @@ public:
         info.flags.stereo = (glfwGetWindowParam(GLFW_STEREO) ? 1 : 0);
 
         gl3wInit();
+
+#ifdef _DEBUG
+        fprintf(stderr, "VENDOR: %s\n", (char *)glGetString(GL_VENDOR));
+        fprintf(stderr, "VERSION: %s\n", (char *)glGetString(GL_VERSION));
+        fprintf(stderr, "RENDERER: %s\n", (char *)glGetString(GL_RENDERER));
+#endif
 
         if (info.flags.debug)
         {
@@ -160,8 +179,13 @@ public:
         strcpy(info.title, "SuperBible6 Example");
         info.windowWidth = 800;
         info.windowHeight = 600;
-        info.majorVersion = 4;
+#ifdef __APPLE__
+        info.majorVersion = 3;
         info.minorVersion = 2;
+#else
+        info.majorVersion = 4;
+        info.minorVersion = 3;
+#endif
         info.samples = 0;
         info.flags.all = 0;
         info.flags.cursor = 1;
@@ -314,7 +338,7 @@ int CALLBACK WinMain(HINSTANCE hInstance,           \
     delete app;                                     \
     return 0;                                       \
 }
-#elif defined _LINUX
+#elif defined _LINUX || defined __APPLE__
 #define DECLARE_MAIN(a)                             \
 int main(int argc, const char ** argv)              \
 {                                                   \
