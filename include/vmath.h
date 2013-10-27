@@ -24,19 +24,22 @@ inline T radians(T angleInDegrees)
     return angleInDegrees * static_cast<T>(M_PI/180.0);
 }
 
-template <const bool cond>
-class ensure
-{
-public:
-    inline ensure() { switch (false) { case false: case cond: break; } }
-};
-
 template <typename T>
 struct random
 {
     operator T ()
     {
-        return static_cast<T>(vmath::random<unsigned int>());
+        static unsigned int seed = 0x13371337;
+        unsigned int res;
+        unsigned int tmp;
+        
+        seed *= 16807;
+        
+        tmp = seed ^ (seed >> 4) ^ (seed << 15);
+        
+        res = (tmp >> 9) | 0x3F800000;
+
+        return static_cast<T>(res);
     }
 };
 
@@ -809,8 +812,6 @@ public:
     // TODO: This only works for square matrices. Need more template skill to make a non-square version.
     inline my_type operator*(const my_type& that) const
     {
-        ensure<w == h>();
-
         my_type result(0);
 
         for (int j = 0; j < w; j++)
@@ -859,8 +860,6 @@ public:
 
     static inline my_type identity()
     {
-        ensure<w == h>();
-
         my_type result(0);
 
         for (int i = 0; i < w; i++)
