@@ -61,7 +61,7 @@ class alienrain_app : public sb6::application
 
         static const char * vs_source[] =
         {
-            "#version 420 core                                                      \n"
+            "#version 410 core                                                      \n"
             "                                                                       \n"
             "layout (location = 0) in int alien_index;                              \n"
             "                                                                       \n"
@@ -105,7 +105,7 @@ class alienrain_app : public sb6::application
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                                      \n"
+            "#version 410 core                                                      \n"
             "                                                                       \n"
             "layout (location = 0) out vec4 color;                                  \n"
             "                                                                       \n"
@@ -115,7 +115,7 @@ class alienrain_app : public sb6::application
             "    vec2 tc;                                                           \n"
             "} fs_in;                                                               \n"
             "                                                                       \n"
-            "layout (binding = 0) uniform sampler2DArray tex_aliens;                \n"
+            "uniform sampler2DArray tex_aliens;                                     \n"
             "                                                                       \n"
             "void main(void)                                                        \n"
             "{                                                                      \n"
