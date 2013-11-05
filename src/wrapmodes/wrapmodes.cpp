@@ -26,7 +26,7 @@
 
 static const char * vs_source[] =
 {
-    "#version 420 core                                                              \n"
+    "#version 410 core                                                              \n"
     "                                                                               \n"
     "uniform vec2 offset;                                                           \n"
     "                                                                               \n"
@@ -46,7 +46,7 @@ static const char * vs_source[] =
 
 static const char * fs_source[] =
 {
-    "#version 430 core                                                              \n"
+    "#version 410 core                                                              \n"
     "                                                                               \n"
     "uniform sampler2D s;                                                           \n"
     "                                                                               \n"
