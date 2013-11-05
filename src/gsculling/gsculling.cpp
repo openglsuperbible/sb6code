@@ -41,7 +41,7 @@ class gsculling_app : public sb6::application
     {
         static const char * vs_source[] =
         {
-            "#version 420                                                                            \n"
+            "#version 410 core                                                                       \n"
             "                                                                                        \n"
             "// Incoming per vertex... position and normal                                           \n"
             "in vec4 vVertex;                                                                        \n"
@@ -78,7 +78,7 @@ class gsculling_app : public sb6::application
 
         static const char * gs_source[] =
         {
-            "#version 420                                                            \n"
+            "#version 410 core                                                       \n"
             "                                                                        \n"
             "layout (triangles) in;                                                  \n"
             "layout (triangle_strip, max_vertices = 3) out;                          \n"
@@ -125,9 +125,7 @@ class gsculling_app : public sb6::application
             "// Fragment Shader                                                      \n"
             "// Graham Sellers                                                       \n"
             "// OpenGL SuperBible                                                    \n"
-            "#version 420                                                            \n"
-            "                                                                        \n"
-            "precision highp float;                                                  \n"
+            "#version 410 core                                                       \n"
             "                                                                        \n"
             "in vec4 color;                                                          \n"
             "                                                                        \n"
