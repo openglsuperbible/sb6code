@@ -66,7 +66,7 @@ class starfield_app : public sb6::application
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                              \n"
+            "#version 410 core                                              \n"
             "                                                               \n"
             "layout (location = 0) out vec4 color;                          \n"
             "                                                               \n"
@@ -101,7 +101,7 @@ class starfield_app : public sb6::application
 
         static const char * vs_source[] =
         {
-            "#version 420 core                                                      \n"
+            "#version 410 core                                                      \n"
             "                                                                       \n"
             "flat out int shape;                                                    \n"
             "                                                                       \n"
