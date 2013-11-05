@@ -42,7 +42,7 @@ class singlepoint_app : public sb6::application
     {
         static const char * vs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "in vec4 position;                                                  \n"
             "                                                                   \n"
@@ -63,7 +63,7 @@ class singlepoint_app : public sb6::application
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "out vec4 color;                                                    \n"
             "                                                                   \n"
