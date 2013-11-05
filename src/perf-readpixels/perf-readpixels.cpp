@@ -27,7 +27,7 @@
 #include <object.h>
 #include <vmath.h>
 
-#ifdef _LINUX
+#ifndef _WIN32
 #include <unistd.h>
 #endif
 
