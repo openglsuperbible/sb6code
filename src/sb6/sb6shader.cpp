@@ -84,6 +84,8 @@ GLuint load(const char * filename, GLenum shader_type, bool check_errors)
             OutputDebugStringA(":");
             OutputDebugStringA(buffer);
             OutputDebugStringA("\n");
+#else
+            fprintf(stderr, "%s: %s\n", filename, buffer);
 #endif
             goto fail_compile_shader;
         }
