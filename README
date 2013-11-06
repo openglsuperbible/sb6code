@@ -9,9 +9,11 @@ are parts of the same application, or there just never was a finished
 application).
 
 There's some basic building instructions in HOWTOBUILD.txt. Everything
-should work with Visual Studio on Windows and GNU make on Linux.
-There are some hokey bits here. If you have serious issues, feel free
-to fix and send pull requests.
+should work with Visual Studio on Windows and GNU make on Linux. Mac
+is now supported if you're running OS 10.9 (Mavericks) or newer. However,
+some of the samples require features that are not supported by Mavericks
+as it's a few OpenGL versions behind. There are some hokey bits here. If
+you find serious issues, feel free to fix and send pull requests.
 
 There will always be a snapshot at http://www.openglsuperbible.com.
 The live repository is at https://github.com/openglsuperbible/sb6code.
