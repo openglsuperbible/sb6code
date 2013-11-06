@@ -1,6 +1,6 @@
 #version 410 core
 
-layout (binding = 0) uniform samplerCube tex_cubemap;
+uniform samplerCube tex_cubemap;
 
 in VS_OUT
 {
