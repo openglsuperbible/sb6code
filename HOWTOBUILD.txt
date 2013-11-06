@@ -31,6 +31,23 @@ make
 
 The examples will build into the 'bin' directory.
 
+Mac:
+
+As with the Linux build, Makefiles are not included. CMake is required to
+create Makefiles and build the samples. While CMake can build Xcode project
+files, they're not fully configured. The build that works is the command line
+build using Makefiles. To generate the Makefiles, go to the top level source
+directory and issue:
+
+cmake -G "Unix Makefiles"
+
+Then run make. Again, the examples will be built into the 'bin' directory
+and be can run from that directory at the command line.
+
+You need Mac OS X 10.9 Mavericks or higher to run the samples. Even then,
+several of the samples won't work as they require OpenGL 4.3 features, and
+Mavericks only supports OpenGL 4.1 (plus a couple of extensions).
+
 Other platforms:
 
 The code will probably build for other platforms, especially if they are
