@@ -1,4 +1,4 @@
-#version 420 core
+#version 410 core
 
 // Output
 layout (location = 0) out vec4 color;

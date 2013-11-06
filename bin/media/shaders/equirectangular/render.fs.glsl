@@ -1,6 +1,6 @@
-#version 420 core
+#version 410 core
 
-layout (binding = 0) uniform sampler2D tex_envmap;
+uniform sampler2D tex_envmap;
 
 in VS_OUT
 {

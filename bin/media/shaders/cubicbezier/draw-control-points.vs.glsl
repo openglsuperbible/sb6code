@@ -1,7 +1,6 @@
-#version 420 core
+#version 410 core
 
 in vec4 position;
-
 uniform mat4 mvp;
 
 void main(void)

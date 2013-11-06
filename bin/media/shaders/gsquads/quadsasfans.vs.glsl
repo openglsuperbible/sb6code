@@ -1,4 +1,4 @@
-#version 420 core
+#version 410 core
 
 uniform mat4 mvp;
 uniform int vid_offset = 0;

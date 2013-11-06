@@ -1,4 +1,4 @@
-#version 420
+#version 410 core
 
 // This input vector contains the vertex position in xyz, and the
 // mass of the vertex in w
@@ -10,7 +10,7 @@ layout (location = 2) in ivec4 connection;
 
 // This is a TBO that will be bound to the same buffer as the
 // position_mass input attribute
-layout (binding = 0) uniform samplerBuffer tex_position;
+uniform samplerBuffer tex_position;
 
 // The outputs of the vertex shader are the same as the inputs
 out vec4 tf_position_mass;

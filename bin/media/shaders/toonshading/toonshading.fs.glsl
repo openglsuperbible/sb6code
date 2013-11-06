@@ -1,6 +1,6 @@
-#version 420 core
+#version 410 core
 
-layout (binding = 0) uniform sampler1D tex_toon;
+uniform sampler1D tex_toon;
 
 uniform vec3 light_pos = vec3(30.0, 30.0, 100.0);
 

@@ -1,4 +1,4 @@
-#version 420 core
+#version 410 core
 
 layout (binding = 0) uniform samplerCube tex_cubemap;
 
