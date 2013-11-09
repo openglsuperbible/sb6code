@@ -3,8 +3,6 @@
 
 #include <vmath.h>
 
-extern "C" void sprintf(char *, const char *, ...);
-
 namespace sb6
 {
 
