@@ -27,6 +27,10 @@
 #include <object.h>
 #include <vmath.h>
 
+#ifndef _WIN32
+#include <unistd.h>
+#endif
+
 class perf_readpixels_app : public sb6::application
 {
 public:
@@ -108,8 +112,17 @@ void perf_readpixels_app::render(double currentTime)
     unsigned char pixel[4 * 30 * 30];
     static unsigned int frame_index = 0;
 
+#if _MSC_VER
     if (paused)
+    {
         Sleep(200);
+    }
+#else
+    if (paused)
+    {
+        usleep(200000);
+    }
+#endif
 
     glClearBufferfv(GL_COLOR, 0, black);
     glClearBufferfv(GL_DEPTH, 0, &one);

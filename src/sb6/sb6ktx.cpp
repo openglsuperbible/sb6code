@@ -1,5 +1,5 @@
 /*
- * Copyright © 2012-2013 Graham Sellers
+ * Copyright ï¿½ 2012-2013 Graham Sellers
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -315,15 +315,6 @@ bool save(const char * filename, unsigned int target, unsigned int tex)
     memset(&h, 0, sizeof(h));
     memcpy(h.identifier, identifier, sizeof(identifier));
     h.endianness = 0x04030201;
-    h.gltype;
-    h.gltypesize;
-    h.glformat;
-    h.glinternalformat;
-    h.glbaseinternalformat;
-    h.arrayelements;
-    h.faces;
-    h.miplevels;
-    h.keypairbytes;
 
     glBindTexture(target, tex);
 

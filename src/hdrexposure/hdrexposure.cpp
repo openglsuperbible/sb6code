@@ -32,8 +32,11 @@ static void print_shader_log(GLuint shader)
     GLint len;
 
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
-    str.resize(len);
-    glGetShaderInfoLog(shader, len, NULL, &str[0]);
+    if (len != 0)
+    {
+        str.resize(len);
+        glGetShaderInfoLog(shader, len, NULL, &str[0]);
+    }
 
 #ifdef _WIN32
     OutputDebugStringA(str.c_str());

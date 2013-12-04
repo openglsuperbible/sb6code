@@ -48,7 +48,7 @@ public:
     {
         static const char * vs_source[] =
         {
-            "#version 420 core                                                                  \n"
+            "#version 410 core                                                                  \n"
             "                                                                                   \n"
             "out VS_OUT                                                                         \n"
             "{                                                                                  \n"
@@ -74,11 +74,11 @@ public:
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                                 \n"
+            "#version 410 core                                                 \n"
             "                                                                  \n"
             "out vec4 color;                                                   \n"
             "                                                                  \n"
-            "layout (binding = 0) uniform sampler2D tex_checker;               \n"
+            "uniform sampler2D tex_checker;                                    \n"
             "                                                                  \n"
             "uniform bool use_perspective = true;                              \n"
             "                                                                  \n"
@@ -90,7 +90,7 @@ public:
             "                                                                  \n"
             "void main(void)                                                   \n"
             "{                                                                 \n"
-            "    vec2 tc = mix(fs_in.tc_np, fs_in.tc, use_perspective);        \n"
+            "    vec2 tc = mix(fs_in.tc_np, fs_in.tc, bvec2(use_perspective));        \n"
             "    color = texture(tex_checker, tc).rrrr;                        \n"
             "}                                                                 \n"
         };

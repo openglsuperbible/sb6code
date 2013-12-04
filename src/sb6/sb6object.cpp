@@ -174,19 +174,42 @@ void object::render_sub_object(unsigned int object_index, unsigned int instance_
 {
     glBindVertexArray(vao);
 
+#if defined (__APPLE__)
+
     if (index_buffer != 0)
     {
-        glDrawElementsInstancedBaseInstance(GL_TRIANGLES, num_indices, index_type, 0, instance_count, base_instance);
+        glDrawElementsInstanced(GL_TRIANGLES,
+                                num_indices,
+                                index_type,
+                                0,
+                                instance_count);
     }
     else
     {
-        // glDrawArraysInstancedBaseInstance(GL_TRIANGLES, 0, num_indices, instance_count, base_instance);
+        glDrawArraysInstanced(GL_TRIANGLES,
+                              sub_object[object_index].first,
+                              sub_object[object_index].count,
+                              instance_count);
+    }
+#else
+    if (index_buffer != 0)
+    {
+        glDrawElementsInstancedBaseInstance(GL_TRIANGLES,
+                                            num_indices,
+                                            index_type,
+                                            0,
+                                            instance_count,
+                                            base_instance);
+    }
+    else
+    {
         glDrawArraysInstancedBaseInstance(GL_TRIANGLES,
                                            sub_object[object_index].first,
                                            sub_object[object_index].count,
                                            instance_count,
                                            base_instance);
     }
+#endif
 }
 
 }

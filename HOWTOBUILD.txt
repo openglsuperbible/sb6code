@@ -1,0 +1,69 @@
+OpenGL SuperBible 6th Edition Examples - How to Build
+-----------------------------------------------------
+
+Windows / Microsoft Visual Studio 2010:
+
+Project files are included in the source archive for Visual Studio 2010. These
+will work with Professional (all tiers) and Express editions. Newer versions
+of Visual Studio _should_ import them just fine, but this is not extensively
+tested. Simply open the sb6.sln file in Visual Studio and hit build (F7).
+Evertything will build and you'll end up with binaries in the 'bin' directory.
+
+Linux:
+
+Makefiles are _not_ included. Rather, the project depends on CMake. You'll
+need to install it with the appropriate method for your distribution. On
+Debian-based distributions (such as Ubuntu and Mint):
+
+sudo apt-get install cmake
+
+You'll also need to satisfy dependencies. In particular, you'll need GL and
+GLX headers and libs (generally included in Mesa packages), and GLFW. There's
+a snapshot of GLFW included in the archive, which you can build and install if
+you wish, but pre-compiled packages should be available for most
+distributions.
+
+Once you have everything, you should enter the top directory where you
+unpacked the source and issue:
+
+cmake .
+make
+
+The examples will build into the 'bin' directory.
+
+Mac:
+
+As with the Linux build, Makefiles are not included. CMake is required to
+create Makefiles and build the samples. While CMake can build Xcode project
+files, they're not fully configured. The build that works is the command line
+build using Makefiles. To generate the Makefiles, go to the top level source
+directory and issue:
+
+cmake -G "Unix Makefiles"
+
+Then run make. Again, the examples will be built into the 'bin' directory
+and be can run from that directory at the command line.
+
+You need Mac OS X 10.9 Mavericks or higher to run the samples. Even then,
+several of the samples won't work as they require OpenGL 4.3 features, and
+Mavericks only supports OpenGL 4.1 (plus a couple of extensions).
+
+Other platforms:
+
+The code will probably build for other platforms, especially if they are
+relatively non-obscure, but nothing besides Windows/Visual Studio and Linux
+has been tested. If you wish, you can re-generate the Visual Studio project
+files using CMake on Windows, and CMake should be able to build the
+appropriate project files for environments such as Code::Blocks and Eclipse,
+but again, this is untested.
+
+Running the samples:
+
+Most of the samples require some media files. The media files package is a
+separate download available from http://www.openglsuperbible.com and is
+rougly 100MB of textures, object files and shader code. Unpack the archive
+to the bin/media directory before trying to run these samples.
+
+Please note carefully: EVEN IF YOU CAN BUILD THE SOURCES FOR YOUR FAVORITE
+PLATFORM OF CHOICE, YOU NEED RECENT OpenGL 4.3 DRIVERS TO RUN THEM. PLEASE
+DON'T PAN MY BOOK BECAUSE YOUR COMPUTER DOESN'T SUPPORT OpenGL 4.3. THANKS

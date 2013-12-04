@@ -39,7 +39,7 @@ class blendmatrix_app : public sb6::application
     {
         static const char * vs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "in vec4 position;                                                  \n"
             "                                                                   \n"
@@ -62,7 +62,7 @@ class blendmatrix_app : public sb6::application
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "layout (location = 0, index = 0) out vec4 color0;                  \n"
             "layout (location = 0, index = 1) out vec4 color1;                  \n"

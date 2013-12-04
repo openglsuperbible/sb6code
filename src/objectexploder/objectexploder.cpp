@@ -41,7 +41,7 @@ class sb6mrender_app : public sb6::application
     {
         static const char * vs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "layout (location = 0) in vec4 position;                            \n"
             "layout (location = 1) in vec3 normal;                              \n"
@@ -65,7 +65,7 @@ class sb6mrender_app : public sb6::application
 
         static const char * gs_source[] =
         {
-            "#version 420 core                                                      \n"
+            "#version 410 core                                                      \n"
             "                                                                       \n"
             "layout (triangles) in;                                                 \n"
             "layout (triangle_strip, max_vertices = 3) out;                         \n"
@@ -102,7 +102,7 @@ class sb6mrender_app : public sb6::application
 
         static const char * fs_source[] =
         {
-            "#version 420 core                                                  \n"
+            "#version 410 core                                                  \n"
             "                                                                   \n"
             "out vec4 color;                                                    \n"
             "                                                                   \n"
