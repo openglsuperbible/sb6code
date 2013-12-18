@@ -7,7 +7,7 @@ Project files are included in the source archive for Visual Studio 2010. These
 will work with Professional (all tiers) and Express editions. Newer versions
 of Visual Studio _should_ import them just fine, but this is not extensively
 tested. Simply open the sb6.sln file in Visual Studio and hit build (F7).
-Evertything will build and you'll end up with binaries in the 'bin' directory.
+Everything will build and you'll end up with binaries in the 'bin' directory.
 
 Linux:
 
@@ -61,7 +61,7 @@ Running the samples:
 
 Most of the samples require some media files. The media files package is a
 separate download available from http://www.openglsuperbible.com and is
-rougly 100MB of textures, object files and shader code. Unpack the archive
+roughly 100MB of textures, object files and shader code. Unpack the archive
 to the bin/media directory before trying to run these samples.
 
 Please note carefully: EVEN IF YOU CAN BUILD THE SOURCES FOR YOUR FAVORITE
