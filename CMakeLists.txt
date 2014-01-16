@@ -2,18 +2,42 @@ cmake_minimum_required (VERSION 2.6)
 
 project (SuperBible6)
 
+#Sets the directory for cmake to find Cmake configration packages,
+#these packages allow for cmake to find libraries that are not included
+#in the standard installation of Cmake. The standard packages can be
+#found @ /usr/share/cmake-2.8/Modules (on Unix Machines)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
+                      ${CMAKE_MODULE_PATH})
+
+#Attempt to search for the necessary Library requirements
+find_package(OpenGL)
+find_package(GLFW)
+
+#If on OSX check for Macports
+if(APPLE)
+  include_directories("/opt/local/include")
+  link_directories("/opt/local/lib")
+endif()
+
 LINK_DIRECTORIES( ${CMAKE_SOURCE_DIR}/lib )
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(WIN32)
-set(COMMON_LIBS sb6 optimized GLFW_r32 debug GLFW_d32)
-elif (UNIX)
-set(COMMON_LIBS sb6 glfw ${GLFW_LIBRARIES} GL rt dl)
+#If we found the two libraries 
+if(${OPENGL_FOUND} STREQUAL "TRUE" AND ${GLFW_FOUND} STREQUAL "YES")
+	include_directories(${OPENGL_INCLUDE_DIR})
+	include_directories(${GLFW_INCLUDE_DIR})
+	set(COMMON_LIBS sb6 ${OPENGL_LIBRARIES} ${GLFW_LIBRARY})
 else()
-set(COMMON_LIBS sb6)
+	if(WIN32)
+		set(COMMON_LIBS sb6 optimized GLFW_r32 debug GLFW_d32)
+	elif (UNIX)
+		set(COMMON_LIBS sb6 glfw ${GLFW_LIBRARIES} GL rt dl)
+	else()
+		set(COMMON_LIBS sb6)
+	endif()
 endif()
 
 IF(APPLE)
