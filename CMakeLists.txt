@@ -13,6 +13,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
 find_package(OpenGL)
 find_package(GLFW)
 
+#If on OSX check for Macports
+if(APPLE)
+  include_directories("/opt/local/include")
+  link_directories("/opt/local/lib")
+endif()
+
 LINK_DIRECTORIES( ${CMAKE_SOURCE_DIR}/lib )
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
