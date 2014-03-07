@@ -10,7 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 if(WIN32)
 set(COMMON_LIBS sb6 optimized GLFW_r32 debug GLFW_d32)
-elif (UNIX)
+elseif (UNIX)
 set(COMMON_LIBS sb6 glfw ${GLFW_LIBRARIES} GL rt dl)
 else()
 set(COMMON_LIBS sb6)
