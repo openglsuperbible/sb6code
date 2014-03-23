@@ -66,7 +66,7 @@
 
 #define GLFW_NO_GLU 1
 #define GLFW_INCLUDE_GLCOREARB 1
-#include "GL/glfw.h"
+#include "GLFW/glfw3.h"
 
 #include "sb6ext.h"
 
@@ -94,46 +94,55 @@ public:
 
         init();
 
-        glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, info.majorVersion);
-        glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, info.minorVersion);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, info.majorVersion);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, info.minorVersion);
 
 #ifdef _DEBUG
-        glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #endif /* _DEBUG */
-        glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwOpenWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwOpenWindowHint(GLFW_FSAA_SAMPLES, info.samples);
-        glfwOpenWindowHint(GLFW_STEREO, info.flags.stereo ? GL_TRUE : GL_FALSE);
-        if (info.flags.fullscreen)
-        {
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_SAMPLES, info.samples);
+        glfwWindowHint(GLFW_STEREO, info.flags.stereo ? GL_TRUE : GL_FALSE);
+
+	if (info.flags.fullscreen)
+	{
             if (info.windowWidth == 0 || info.windowHeight == 0)
+            {        
+                const GLFWvidmode* mode;
+                mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+                info.windowWidth = mode->width;
+				info.windowHeight = mode->height;
+	    }
+	    currwindow = glfwCreateWindow(info.windowWidth, info.windowHeight, "Hello OpenGL", glfwGetPrimaryMonitor(), NULL);
+            if (!currwindow)
             {
-                GLFWvidmode mode;
-                glfwGetDesktopMode(&mode);
-                info.windowWidth = mode.Width;
-                info.windowHeight = mode.Height;
+                fprintf(stderr, "Failed to open window\n");
+		glfwTerminate();
+                return;
             }
-            glfwOpenWindow(info.windowWidth, info.windowHeight, 8, 8, 8, 0, 32, 0, GLFW_FULLSCREEN);
-            glfwSwapInterval((int)info.flags.vsync);
+	    glfwSwapInterval((int)info.flags.vsync);
         }
         else
         {
-            if (!glfwOpenWindow(info.windowWidth, info.windowHeight, 8, 8, 8, 0, 32, 0, GLFW_WINDOW))
+       	    currwindow = glfwCreateWindow(info.windowWidth, info.windowHeight, "Hello OpenGL", NULL, NULL);
+            if (!currwindow)
             {
                 fprintf(stderr, "Failed to open window\n");
+				glfwTerminate();
                 return;
-            }
-        }
+            } 
+	}
+	glfwMakeContextCurrent(currwindow);
 
-        glfwSetWindowTitle(info.title);
-        glfwSetWindowSizeCallback(glfw_onResize);
-        glfwSetKeyCallback(glfw_onKey);
-        glfwSetMouseButtonCallback(glfw_onMouseButton);
-        glfwSetMousePosCallback(glfw_onMouseMove);
-        glfwSetMouseWheelCallback(glfw_onMouseWheel);
-        (info.flags.cursor ? glfwEnable : glfwDisable)(GLFW_MOUSE_CURSOR);
+        glfwSetWindowTitle(currwindow, info.title);
+        glfwSetWindowSizeCallback(currwindow, glfw_onResize);
+        glfwSetKeyCallback(currwindow, glfw_onKey);
+        glfwSetMouseButtonCallback(currwindow, glfw_onMouseButton);
+        glfwSetScrollCallback(currwindow, glfw_onMouseWheel);
+        (info.flags.cursor ? glfwSetInputMode(currwindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL) : glfwSetInputMode(currwindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN));
 
-        info.flags.stereo = (glfwGetWindowParam(GLFW_STEREO) ? 1 : 0);
+        info.flags.stereo = (glfwGetWindowAttrib(currwindow, GLFW_STEREO) ? 1 : 0);
 
         gl3wInit();
 
@@ -163,11 +172,10 @@ public:
         {
             render(glfwGetTime());
 
-            glfwSwapBuffers();
-
-            running &= (glfwGetKey( GLFW_KEY_ESC ) == GLFW_RELEASE);
-            running &= (glfwGetWindowParam( GLFW_OPENED ) != GL_FALSE);
-        } while(running);
+            glfwSwapBuffers(currwindow);
+			glfwPollEvents();
+            running &= (glfwGetKey(currwindow, GLFW_KEY_ESCAPE   ) == GLFW_RELEASE);
+        } while(!glfwWindowShouldClose(currwindow) && running);
 
         shutdown();
 
@@ -250,7 +258,7 @@ public:
 
     static void getMousePosition(int& x, int& y)
     {
-        glfwGetMousePos(&x, &y);
+    	//TODO
     }
 
 public:
@@ -279,30 +287,31 @@ public:
 protected:
     APPINFO     info;
     static      sb6::application * app;
+    GLFWwindow* currwindow;
 
-    static void GLFWCALL glfw_onResize(int w, int h)
+    static void glfw_onResize(GLFWwindow* win, int w, int h)
     {
         app->onResize(w, h);
     }
 
-    static void GLFWCALL glfw_onKey(int key, int action)
+    static void glfw_onKey(GLFWwindow* win, int key, int scancode, int action, int mods)
     {
         app->onKey(key, action);
     }
 
-    static void GLFWCALL glfw_onMouseButton(int button, int action)
+    static void glfw_onMouseButton(GLFWwindow* win, int button, int action, int mods)
     {
         app->onMouseButton(button, action);
     }
 
-    static void GLFWCALL glfw_onMouseMove(int x, int y)
+    static void glfw_onMouseMove(int x, int y)
     {
         app->onMouseMove(x, y);
     }
 
-    static void GLFWCALL glfw_onMouseWheel(int pos)
+    static void glfw_onMouseWheel(GLFWwindow* win, double pos1, double pos2)
     {
-        app->onMouseWheel(pos);
+        app->onMouseWheel(pos1, pos2);
     }
 
     void setVsync(bool enable)
