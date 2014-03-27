@@ -238,7 +238,7 @@ public:
 
     }
 
-    virtual void onMouseWheel(int pos)
+    virtual void onMouseWheel(double pos1, double pos2)
     {
 
     }
