@@ -112,6 +112,8 @@ public:
 
         glLinkProgram(program);
 
+        exposure = glGetUniformLocation(program, "exposure");
+
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
     }
@@ -130,13 +132,14 @@ public:
 
         glUseProgram(program);
         glViewport(0, 0, info.windowWidth, info.windowHeight);
-        glUniform1f(0, (float)(sin(t) * 16.0 + 16.0));
+        glUniform1f(exposure, (float)(sin(t) * 16.0 + 16.0));
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 
 private:
     GLuint      texture;
     GLuint      program;
+    GLuint      exposure;
     GLuint      vao;
 };
 
