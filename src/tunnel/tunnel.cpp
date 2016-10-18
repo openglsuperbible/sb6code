@@ -94,7 +94,7 @@ class tunnel_app : public sb6::application
         glShaderSource(fs, 1, fs_source, NULL);
         glCompileShader(fs);
 
-        glGetShaderInfoLog(vs, 1024, NULL, buffer);
+        glGetShaderInfoLog(fs, 1024, NULL, buffer);
 
         render_prog = glCreateProgram();
         glAttachShader(render_prog, vs);
